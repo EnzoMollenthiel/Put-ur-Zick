@@ -2,7 +2,7 @@ angular.module('components')
 
 .component('profile', {
 
-  templateUrl: 'js/components/profile/profile.html',
+  templateUrl: 'client/js/components/profile/profile.html',
   
   bindings:{
 

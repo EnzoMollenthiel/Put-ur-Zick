@@ -1,8 +1,8 @@
 angular.module('components')
 
-  .component('playlist', {
+  .component('playlists', {
 
-    templateUrl: 'js/components/playlist/playlist.html',
+    templateUrl: 'client/js/components/playlist/playlists.html',
 
     bindings: {
 
@@ -22,3 +22,4 @@ angular.module('components')
       };
     }
   })
+
