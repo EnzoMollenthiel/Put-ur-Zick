@@ -1,0 +1,24 @@
+{
+  "name": "put-your-zick",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EnzoMollenthiel/Put-ur-Zick.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EnzoMollenthiel/Put-ur-Zick/issues"
+  },
+  "homepage": "https://github.com/EnzoMollenthiel/Put-ur-Zick#readme",
+  "dependencies": {
+    "@uirouter/angularjs": "^1.0.3",
+    "angular": "^1.6.4",
+    "bootstrap": "^3.3.7"
+  }
+}
