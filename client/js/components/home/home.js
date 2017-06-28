@@ -2,7 +2,7 @@ angular.module('components')
 
 .component('home', {
   
-  templateUrl: 'js/components/home/home.html',
+  templateUrl: 'client/js/components/home/home.html',
   
   bindings:{
 

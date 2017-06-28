@@ -2,7 +2,7 @@ angular.module('components')
 
 .component('main', {
 
-  templateUrl: 'js/components/main/main.html',
+  templateUrl: 'client/js/components/main/main.html',
   
   bindings:{
 

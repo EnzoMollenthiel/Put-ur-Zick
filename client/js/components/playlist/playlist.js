@@ -2,7 +2,7 @@ angular.module('components')
 
 .component('playlist', {
 
-  templateUrl: 'js/components/playlist/playlist.html',
+  templateUrl: 'client/js/components/playlist/playlist.html',
   
   bindings:{
 
