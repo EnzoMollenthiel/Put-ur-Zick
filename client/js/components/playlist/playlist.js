@@ -1,17 +1,24 @@
 angular.module('components')
 
-.component('playlist', {
+  .component('playlist', {
 
-  templateUrl: 'js/components/playlist/playlist.html',
-  
-  bindings:{
+    templateUrl: 'js/components/playlist/playlist.html',
 
-  }, 
-  
-  controller: function () {
-    
-    this.$onInit = () => {
-    }   
-        
-  }
-})
+    bindings: {
+
+    },
+
+    controller: function (PlaylistService) {
+
+      this.$onInit = () => {
+        this.getPublicPlaylists();
+      }
+
+      this.getPublicPlaylists = () => {
+        PlaylistService.getPlayLists().then((list) => {
+          this.list = list;
+        }).catch((err) => { });
+
+      };
+    }
+  })
