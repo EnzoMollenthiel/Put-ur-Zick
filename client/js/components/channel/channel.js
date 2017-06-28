@@ -1,18 +1,35 @@
 angular.module('components')
 
-.component('playlist', {
-
+.component('channel', {
+  
   templateUrl: 'client/js/components/channel/channel.html',
   
   bindings:{
-    musics : '<'
+    // musics : '<'
   }, 
   
-  controller: function () {
+  controller: function (PlaylistService) {
     
     this.$onInit = () => {
-      console.log(this.musics)
+      this.musics =[ {
+        title : 'title',
+        message : 'message'
+      },{
+        title : 'jaja',
+        message : 'lala'
+      }
+      ]
+      
     }   
-        
+    
+    this.post = () => {
+      console.log(this.form)
+      PlaylistService.post(this.form).then((response) => {
+        console.log(response);
+      }).catch((err) => {
+        console.log(err);
+      })
+    }
+    
   }
 })

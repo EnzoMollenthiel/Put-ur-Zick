@@ -6,3 +6,13 @@
 body { margin-top:30px; }
 #login-nav input { margin-bottom: 15px; }
 
+.messages img{
+  float: left;
+  margin-left: 15%;
+}
+
+.messages {
+  text-align: center;
+}
+
+

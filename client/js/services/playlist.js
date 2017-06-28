@@ -15,4 +15,15 @@ angular.module("services")
     });
   }
   
+  this.post = (music) => {
+    return $q((resolve, reject) => {
+      $http.post(PLAYLIST_URL + id, music).then((response) => {
+        resolve(response.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+    });
+  }
+  
 });
