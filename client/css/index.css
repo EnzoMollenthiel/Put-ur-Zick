@@ -96,6 +96,9 @@ list-style-type: none;
   padding-left: 20px;
   border-radius: 5px;
 }
+.input-group .form-control:focus{
+  border: none;
+}
 .input-group .btn-default {
    height: 40px;
   background-color: #2b303b;
