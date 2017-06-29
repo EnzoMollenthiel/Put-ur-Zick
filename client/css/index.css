@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Pangolin');
 
 html {
-background: url('img/539618.jpg') fixed no-repeat ;
+background: url('img/fond.jpg') fixed no-repeat ;
 
 }
 body {  
@@ -29,6 +29,13 @@ h1 {
   font-family: 'Pangolin', Arial, sans-serif;
   font-size: 3em;
 }
+#page p {
+  font-size: 4em;
+  font-family: 'Pangolin', Arial, sans-serif;
+  color: white;
+  padding: 20px;
+  letter-spacing: 2px;
+}
 #login-nav input { margin-bottom: 15px; }
 
 .container h2 {
@@ -52,13 +59,16 @@ h1 {
   padding-left: 10px;
 
 }
-.vignette {
-  /*background-image: url('img/v1.jpg');*/
+.img-thumbnail {
+background-color: transparent;
+border-color: grey;
+border-radius: 0px;
 }
 
 .items ul {
-  list-style-type: none;
+list-style-type: none;
  color: #e2d7e1;
+ padding-left: 10px;
 }
 .items h4 {
   color: #db08d4;
