@@ -1,4 +1,4 @@
-const PLAYLIST_URL = '';
+const PLAYLIST_URL = 'http://localhost:3000/playlist';
 
 angular.module("services")
 

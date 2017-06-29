@@ -24,7 +24,7 @@ angular.module('components')
 
     this.submitSignIn = () => {
       console.log(this.signIn)
-      UsersService.signUp(this.signIn).then((response) => {
+      UsersService.signIn(this.signIn).then((response) => {
         console.log(response)
       }).catch((err) => {
         console.log(err)
