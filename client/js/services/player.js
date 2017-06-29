@@ -20,7 +20,7 @@ angular.module("services")
     this.results = [];
 
     this.history = [
-      { id: 'XKa7Ywiv734', title: '[OFFICIAL HD] Daft Punk - Give Life Back To Music (feat. Nile Rodgers)', author: '' }
+      { music: 'XKa7Ywiv734', title: '[OFFICIAL HD] Daft Punk - Give Life Back To Music (feat. Nile Rodgers)', author: '' }
     ];
 
     $window.onYouTubeIframeAPIReady = () => {
@@ -33,8 +33,8 @@ angular.module("services")
 
     onYoutubeReady = (event) => {
       $log.info('YouTube Player is ready');
-      this.youtube.player.cueVideoById(this.history[0].id);
-      this.youtube.videoUrl = this.history[0].id;
+      this.youtube.player.cueVideoById(this.history[0].music);
+      this.youtube.videoUrl = this.history[0].music;
       this.youtube.videoTitle = this.history[0].title;
     }
 
@@ -45,8 +45,8 @@ angular.module("services")
         this.youtube.state = 'paused';
       } else if (event.data == YT.PlayerState.ENDED) {
         this.youtube.state = 'ended';
-        this.launchPlayer(this.upcoming[0].id, this.upcoming[0].title);
-        this.archiveVideo(this.upcoming[0].id, this.upcoming[0].title);
+        this.launchPlayer(this.upcoming[0].music, this.upcoming[0].title);
+        this.archiveVideo(this.upcoming[0].music, this.upcoming[0].title);
         this.deleteVideo(this.upcoming, this.upcoming[0].id);
       }
       $rootScope.$apply();
@@ -82,35 +82,35 @@ angular.module("services")
       }
     };
 
-    this.launchPlayer = (id, title) => {
-      this.youtube.player.loadVideoById(id);
-      this.youtube.videoId = id;
+    this.launchPlayer = (music, title) => {
+      this.youtube.player.loadVideoById(music);
+      this.youtube.videoId = music;
       this.youtube.videoTitle = title;
       console.log(this.youtube.videoUrl)
       return this.youtube;
     }
 
-    this.queueVideo = (id, title, author) => {
+    this.queueVideo = (music, title, author) => {
       this.upcoming.push({
-        id: id,
+        id: music,
         title: title,
         author: author
       });
       return this.upcoming;
     };
 
-    this.archiveVideo = (id, title, author) => {
+    this.archiveVideo = (music, title, author) => {
       this.history.unshift({
-        id: id,
+        id: music,
         title: title,
         author: author
       });
       return this.history;
     };
 
-    this.deleteVideo = (list, id) => {
+    this.deleteVideo = (list, music) => {
       for (var i = list.length - 1; i >= 0; i--) {
-        if (list[i].id === id) {
+        if (list[i].music === music) {
           list.splice(i, 1);
           break;
         }

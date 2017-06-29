@@ -20,21 +20,21 @@ angular.module('components')
         this.playlist = true;
       }
 
-      this.launch = (id, title) => {
-        playerService.launchPlayer(id, title);
-        playerService.archiveVideo(id, title);
+      this.launch = (music, title) => {
+        playerService.launchPlayer(music, title);
+        playerService.archiveVideo(music, title);
         //playerService.deleteVideo(this.upcoming, url);
-        $log.info('Launched id:' + id + ' and title:' + title);
+        $log.info('Launched id:' + music + ' and title:' + title);
       };
 
-      this.queue = (id, title) => {
-        playerService.queueVideo(id, title);
-        playerService.deleteVideo(this.history, id);
-        $log.info('Queued id:' + id + ' and title:' + title);
+      this.queue = (music, title) => {
+        playerService.queueVideo(music, title);
+        playerService.deleteVideo(this.history, music);
+        $log.info('Queued id:' + music + ' and title:' + title);
       };
 
-      this.delete = (list, id) => {
-        playerService.deleteVideo(list, id);
+      this.delete = (list, music) => {
+        playerService.deleteVideo(list, music);
       };
 
       this.tabulate = (state) => {

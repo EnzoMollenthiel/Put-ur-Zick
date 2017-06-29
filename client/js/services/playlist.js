@@ -15,7 +15,8 @@ angular.module("services")
         });
       return defer.promise;
     };
-    
+
+
     this.get = (id) => {
       return $q((resolve, reject) => {
         $http.get(PLAYLIST_URL + id).then((response) => {
