@@ -1,13 +1,17 @@
 <p>videos LIST</p>
-<div class="col-m-6">
-    <div class="video" ng-repeat="video in $ctrl.list ">
-        <div class="vignette"> </div>
-        <div class="items">
-            <ul>
-                <li><a href="{{video.url}}"><h3>{{video.title}}</h3></a> </li>
-                <li>{{video.author}} </li>
-                <li><em>Posté par {{user_id}}, le {{date}}</em></li>
-            </ul>
-        </div>
+
+<div class="video" ng-repeat="video in $ctrl.list ">
+    <div class="col-md-3 col-xs-3 vignette"></div>
+    <div class="col-md-7 col-xs-7 items">
+        <ul>
+            <li>
+                <a href="{{video.url}}">
+                    <h4>{{video.title}}</h4>
+                </a>
+            </li>
+            <li>
+                <h5>{{video.author}}</h5>
+            </li>
+            <li><em>Posté par {{user_id}}, le {{date}}</em></li>
+        </ul>
     </div>
-</div>

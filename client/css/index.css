@@ -1,11 +1,38 @@
+html {
+background-image: url('img/539618.jpg') ;
+}
+body {  
+  margin: 0 auto;
+bottom: 0;
+top: 0;
+left: 0;
+right: 0;
+  padding-top: 70px; 
+  background-color: rgba(0,0,0, 0.4); 
+  position: absolute;
+}
+#page {
+   background-color: rgba(0,0,0, 0.65);
+   padding: 50px 0;
+   border-radius: 20px;
+}
+#login-nav input { margin-bottom: 15px; }
 
 .container h2 {
   text-align : center;
+}
+.navbar-default {
+  background-color: black;
+  border-color: black;
+
 }
 
 /*PLAYLIST*/
 .video {
   display :flex;
+  padding-bottom: 20px;
+  padding-top: 0;
+
 }
 .vignette {
   width: 100px;
@@ -13,11 +40,12 @@
 }
 .items ul {
   list-style-type: none;
+ color: #e2d7e1;
 }
-
-body { margin-top:30px; }
-#login-nav input { margin-bottom: 15px; }
-
+.items h4 {
+  color: #db08d4;
+  font-size: 20px;
+}
 .messages img{
   float: left;
   margin-left: 15%;
