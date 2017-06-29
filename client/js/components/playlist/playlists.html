@@ -1,5 +1,12 @@
 <p>videos LIST</p>
-
+<div id="results" ng-if=$ctrl.query>
+    <div class="video" ng-repeat="video in $ctrl.results" ng-click="$ctrl.queue(video.id, video.title)">
+        <img class="video-image" ng-src="{{video.thumbnail }}">
+        <p class="video-title">{{video.title }}</p>
+        <p class="video-author">{{video.author }}</p>
+        <p class="video-description">{{video.description }}</p>
+    </div>
+</div>
 <div class="video" ng-repeat="video in $ctrl.list ">
     <div class="col-md-3 col-xs-3 vignette"></div>
     <div class="col-md-7 col-xs-7 items">
@@ -15,3 +22,7 @@
             <li><em>Posté par {{user_id}}, le {{date}}</em></li>
         </ul>
     </div>
+</div>
+<div class="col-md-6 col-xs-12 player">
+    <player upcoming='$ctrl.list'></player>
+</div>

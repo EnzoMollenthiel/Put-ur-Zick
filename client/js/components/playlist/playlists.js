@@ -5,10 +5,10 @@ angular.module('components')
     templateUrl: 'client/js/components/playlist/playlists.html',
 
     bindings: {
-
+      query: '<'
     },
 
-    controller: function (PlaylistService) {
+    controller: function (PlaylistService, playerService) {
 
       this.$onInit = () => {
         this.getPublicPlaylists();

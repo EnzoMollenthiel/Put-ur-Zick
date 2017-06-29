@@ -1,5 +1,5 @@
 html {
-background-image: url('img/539618.jpg') ;
+background: url('img/539618.jpg') fixed no-repeat #fff;
 }
 body {  
   margin: 0 auto;
@@ -55,3 +55,6 @@ right: 0;
   text-align: center;
 }
 
+.item-title {
+  color : #fff;
+}

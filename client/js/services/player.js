@@ -1,6 +1,7 @@
 angular.module("services")
 
   .service("playerService", function ($http, $q, $log, $window, $rootScope) {
+
     var tag = document.createElement('script');
     tag.src = "http://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -10,27 +11,17 @@ angular.module("services")
       ready: false,
       player: null,
       playerId: null,
-      videoId: null,
+      videoUrl: null,
       videoTitle: null,
       playerHeight: '480',
       playerWidth: '640',
-      state: 'stopped'
+      state: 'playing'
     };
 
     this.results = [];
 
-    this.upcoming = [
-      { id: 'kRJuY6ZDLPo', title: 'La Roux - In for the Kill (Twelves Remix)' },
-      { id: '45YSGFctLws', title: 'Shout Out Louds - Illusions' },
-      { id: 'ktoaj1IpTbw', title: 'CHVRCHES - Gun' },
-      { id: '8Zh0tY2NfLs', title: 'N.E.R.D. ft. Nelly Furtado - Hot N\' Fun (Boys Noize Remix) HQ' },
-      { id: 'zwJPcRtbzDk', title: 'Daft Punk - Human After All (SebastiAn Remix)' },
-      { id: 'sEwM6ERq0gc', title: 'HAIM - Forever (Official Music Video)' },
-      { id: 'fTK4XTvZWmk', title: 'Housse De Racket â˜â˜€â˜ Apocalypso' }
-    ];
-
     this.history = [
-      { id: 'XKa7Ywiv734', title: '[OFFICIAL HD] Daft Punk - Give Life Back To Music (feat. Nile Rodgers)' }
+      { id: 0, url: 'http://www.youtube.com/watch?v=XKa7Ywiv734', title: '[OFFICIAL HD] Daft Punk - Give Life Back To Music (feat. Nile Rodgers)', author: '' }
     ];
 
     $window.onYouTubeIframeAPIReady = () => {
@@ -43,8 +34,8 @@ angular.module("services")
 
     onYoutubeReady = (event) => {
       $log.info('YouTube Player is ready');
-      this.youtube.player.cueVideoById(this.history[0].id);
-      this.youtube.videoId = this.history[0].id;
+      this.youtube.player.cueVideoByUrl(this.history[0].url);
+      this.youtube.videoUrl = this.history[0].url;
       this.youtube.videoTitle = this.history[0].title;
     }
 
@@ -55,8 +46,8 @@ angular.module("services")
         this.youtube.state = 'paused';
       } else if (event.data == YT.PlayerState.ENDED) {
         this.youtube.state = 'ended';
-        this.launchPlayer(this.upcoming[0].id, this.upcoming[0].title);
-        this.archiveVideo(this.upcoming[0].id, this.upcoming[0].title);
+        this.launchPlayer(this.upcoming[0].url, this.upcoming[0].title);
+        this.archiveVideo(this.upcoming[0].url, this.upcoming[0].title);
         this.deleteVideo(this.upcoming, this.upcoming[0].id);
       }
       $rootScope.$apply();
@@ -68,7 +59,7 @@ angular.module("services")
     };
 
     this.createPlayer = () => {
-      $log.info('Creating a new Youtube player for DOM id ' + this.youtube.playerId + ' and video ' + this.youtube.videoId);
+      $log.info('Creating a new Youtube player for DOM id ' + this.youtube.playerId + ' and video ' + this.youtube.videoUrl);
       return new YT.Player(this.youtube.playerId, {
         height: this.youtube.playerHeight,
         width: this.youtube.playerWidth,
@@ -92,19 +83,20 @@ angular.module("services")
       }
     };
 
-    this.launchPlayer = (id, title) => {
-      this.youtube.player.loadVideoById(id);
-      this.youtube.videoId = id;
+    this.launchPlayer = (url, title) => {
+      this.youtube.player.loadVideoByUrl(url);
+      this.youtube.videoUrl = url;
       this.youtube.videoTitle = title;
+      console.log(this.youtube.videoUrl)
       return this.youtube;
     }
 
-    listResults = (data) => {
+    this.listResults = (data) => {
       this.results.length = 0;
       console.log(data);
       for (var i = data.items.length - 1; i >= 0; i--) {
         this.results.push({
-          id: data.items[i].id.videoId,
+          url: data.items[i].id.videoUrl,
           title: data.items[i].snippet.title,
           description: data.items[i].snippet.description,
           thumbnail: data.items[i].snippet.thumbnails.default.url,
@@ -114,23 +106,27 @@ angular.module("services")
       return this.results;
     }
 
-    this.queueVideo = (id, title) => {
+    this.queueVideo = (id, url, title, author) => {
       this.upcoming.push({
         id: id,
-        title: title
+        url: url,
+        title: title,
+        author: author
       });
       return this.upcoming;
     };
 
-    this.archiveVideo = (id, title) => {
+    this.archiveVideo = (id, url, title, author) => {
       this.history.unshift({
         id: id,
-        title: title
+        url: url,
+        title: title,
+        author: author
       });
       return this.history;
     };
 
-    this.deleteVideo = (list, id) => {
+    deleteVideo = (list, id) => {
       for (var i = list.length - 1; i >= 0; i--) {
         if (list[i].id === id) {
           list.splice(i, 1);
@@ -138,6 +134,26 @@ angular.module("services")
         }
       }
     };
+
+    this.search = () => {
+      $http.get('https://www.googleapis.com/youtube/v3/search', {
+        params: {
+          key: 'AIzaSyCRkX3XPUNcOFOB9aVVUKr4oneXd3mtui0',
+          type: 'video',
+          maxResults: '8',
+          part: 'id,snippet',
+          fields: 'items/url,items/snippet/title,items/snippet/description,items/snippet/thumbnails/default,items/snippet/channelTitle',
+          q: this.query
+        }
+      })
+        .then((data) => {
+          playerService.listResults(data);
+          $log.info(data);
+        })
+        .catch(() => {
+          $log.info('Search error');
+        });
+    }
 
     this.getYoutube = () => {
       return this.youtube;

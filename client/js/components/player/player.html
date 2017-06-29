@@ -3,14 +3,7 @@
         <a id="pause">Pause</a>
     </nav>
 
-<div id="results">
-    <div class="video" ng-repeat="video in $ctrl.results" ng-click="$ctrl.queue(video.id, video.title)">
-        <img class="video-image" ng-src="{{video.thumbnail }}">
-        <p class="video-title">{{video.title }}</p>
-        <p class="video-author">{{video.author }}</p>
-        <p class="video-description">{{video.description }}</p>
-    </div>
-</div>
+
 <div id="player">
     <div id="placeholder"></div>
 </div>
@@ -18,13 +11,13 @@
     <p id="current">{{$ctrl.youtube.videoTitle }}</p>
     <ol id="upcoming" ng-show="$ctrl.playlist">
         <li ng-repeat="video in $ctrl.upcoming">
-            <p class="item-delete" ng-click="$ctrl.delete('upcoming', video.id)">delete</p>
+            <p class="item-delete" ng-click="$ctrl.delete($ctrl.upcoming, video.id)">delete</p>
             <p class="item-title" ng-click="$ctrl.launch(video.id, video.title)">{{video.title}}</p>
         </li>
     </ol>
     <ol id="history" ng-hide="$ctrl.playlist">
         <li ng-repeat="video in $ctrl.history">
-            <p class="item-delete" ng-click="$ctrl.delete('history', video.id)">delete</p>
+            <p class="item-delete" ng-click="$ctrl.delete($ctrl.history, video.id)">delete</p>
             <p class="item-title" ng-click="$ctrl.queue(video.id, video.title)">{{video.title}}</p>
         </li>
     </ol>

@@ -2,19 +2,19 @@
     "playlist": [
         {
             "id": 1,
-            "url": "https://www.youtube.com/watch?v=AWAsI3U2EaE",
+            "url": "http://www.youtube.com/watch?v=AWAsI3U2EaE",
             "title": "Golden Brown",
             "author": "The Stranglers"
         },
         {
             "id": 2,
-            "url": "https://www.youtube.com/watch?v=66Hu-tx1urg",
+            "url": "http://www.youtube.com/watch?v=66Hu-tx1urg",
             "title": "Gravity grave",
             "author": "The Verve"
         },
         {
             "id": 3,
-            "url": "https://www.youtube.com/watch?v=WbrjRKB586s",
+            "url": "http://www.youtube.com/watch?v=WbrjRKB586s",
             "title": "When The Levee Breaks",
             "author": "Led Zeppelin"
         }
