@@ -1,6 +1,6 @@
 angular.module('components')
 
-.component('playlist', {
+.component('player', {
 
   templateUrl: 'client/js/components/player/player.html',
   
