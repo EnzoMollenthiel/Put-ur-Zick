@@ -11,7 +11,7 @@
     <p id="current">{{$ctrl.youtube.videoTitle }}</p>
     <ol id="upcoming" ng-show="$ctrl.playlist">
         <li ng-repeat="video in $ctrl.upcoming">
-            <p class="item-delete" ng-click="$ctrl.delete($ctrl.upcoming, video.id)">delete</p>
+            <p class="item-delete" ng-click="$ctrl.delete(video.id)">delete</p>
             <p class="item-title" ng-click="$ctrl.launch(video.id, video.title)">{{video.title}}</p>
         </li>
     </ol>

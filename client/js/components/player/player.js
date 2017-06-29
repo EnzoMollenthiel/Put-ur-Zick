@@ -8,36 +8,36 @@ angular.module('components')
       upcoming: '<',
     },
 
-    controller: function ($scope, $http, $log, playerService) {
+    controller: function ($log, playerService) {
 
       this.$onInit = () => {
-        console.log(this.upcoming);
         this.youtube = playerService.getYoutube();
         console.log(this.youtube);
         this.results = playerService.getResults();
-       // this.upcoming = playerService.getUpcoming();
+        console.log(this.upcoming);
         this.history = playerService.getHistory();
+        console.log(this.history);
         this.playlist = true;
       }
 
-      this.launch = (url, title) => {
-        playerService.launchPlayer(url, title);
-        playerService.archiveVideo(url, title);
-       playerService.deleteVideo(this.upcoming, url);
-        $log.info('Launched url:' + url + ' and title:' + title);
+      this.launch = (id, title) => {
+        playerService.launchPlayer(id, title);
+        playerService.archiveVideo(id, title);
+        //playerService.deleteVideo(this.upcoming, url);
+        $log.info('Launched id:' + id + ' and title:' + title);
       };
 
-      this.queue = (url, title) => {
-        playerService.queueVideo(url, title);
-        playerService.deleteVideo(this.history, url);
-        $log.info('Queued id:' + url + ' and title:' + title);
+      this.queue = (id, title) => {
+        playerService.queueVideo(id, title);
+        playerService.deleteVideo(this.history, id);
+        $log.info('Queued id:' + id + ' and title:' + title);
       };
 
-      this.delete = (list, url) => {
-        playerService.deleteVideo(list, url);
+      this.delete = (list, id) => {
+        playerService.deleteVideo(list, id);
       };
 
-       this.tabulate = (state) => {
+      this.tabulate = (state) => {
         this.playlist = state;
       }
 

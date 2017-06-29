@@ -12,6 +12,7 @@ angular.module('components')
 
       this.$onInit = () => {
         this.getPublicPlaylists();
+  
       }
 
       this.getPublicPlaylists = () => {
