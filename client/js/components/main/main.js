@@ -1,17 +1,16 @@
 angular.module('components')
 
-.component('main', {
+  .component('main', {
 
-  templateUrl: 'client/js/components/main/main.html',
-  
-  bindings:{
+    templateUrl: 'client/js/components/main/main.html',
 
-  }, 
-  
-  controller: function () {
-    
-    this.$onInit = () => {
-    }   
-        
-  }
-})
+    bindings: {
+
+    },
+
+    controller: function () {
+
+      this.$onInit = () => {
+      }
+    }
+  })
