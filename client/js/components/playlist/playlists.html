@@ -1,9 +1,13 @@
-<p>playlist</p>
-<div ng-repeat="playlist in $ctrl.list ">
-    <ul>
-        <li><a href ="{{playlist.url}}">{{playlist.url}}</a> </li>
-        <li>{{playlist.title}} </li>
-        <li>{{playlist.author}} </li>
-        <li><em>Posté par {{user_id}}, le {{date}}</em></li>
-    </ul>
+<p>videos LIST</p>
+<div class="col-m-6">
+    <div class="video" ng-repeat="video in $ctrl.list ">
+        <div class="vignette"> </div>
+        <div class="items">
+            <ul>
+                <li><a href="{{video.url}}"><h3>{{video.title}}</h3></a> </li>
+                <li>{{video.author}} </li>
+                <li><em>Posté par {{user_id}}, le {{date}}</em></li>
+            </ul>
+        </div>
+    </div>
 </div>
