@@ -8,9 +8,12 @@ angular.module('components')
 
     },
 
-    controller: function (playerService) {
-
+    controller: function ($http, $rootScope) {
+ 
       this.$onInit = () => {
+
       }
+
+
     }
   })

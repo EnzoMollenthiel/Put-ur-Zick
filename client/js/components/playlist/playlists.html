@@ -1,37 +1,32 @@
-<!--<div class="col-md-6 col-xs-12" id="results" ng-if=$ctrl.query>
-    <div class="video" ng-repeat="video in $ctrl.results" ng-click="$ctrl.queue(video.id, video.title)">
+<div class="col-md-6 col-xs-12">
+<form id="search" role="search" ng-submit="$ctrl.search()">
+    <div class="form-group">
+        <input id="query" name="q" class="form-control" type="text" placeholder="Search for a YouTube video" ng-model="$ctrl.query">
+        <button id="submit" type="submit" class="btn btn-default">Submit</button>
+    </div>
+</form>
+<div ng-show='$ctrl.query'>
+    <div class="video" ng-repeat="video in $ctrl.results" ng-click="$ctrl.queue(video.music, video.title)">
         <div class="col-md-4 col-xs-4 vignette">
-            <img class="video-image" ng-src="{{video.thumbnail }}" class="img-thumbnail" width="210"></div>
+        <img class="video-image" ng-src="{{video.thumbnail }}">
+        </div>
         <div class="col-md-8 col-xs-8 items">
-            <ul>
-                <li>
-                    <h4>titre : {{video.title}}</h4>
-                </li>
-                <li>
-                    <h3>{{video.author}}</h3>
-                </li>
-                <li><em>Posté par {{user_id}}, le {{date}}</em></li>
-            </ul>
+        <p class="video-title">{{video.title }}</p>
         </div>
     </div>
-</div>-->
-<div class="col-md-6 col-xs-12">
-    <div class="video" ng-repeat="video in $ctrl.list ">
-        <div class="col-md-4 col-xs-4 vignette">
-            <img alt="photo" src="client/css/img/v1.jpg" class="img-thumbnail" width="210" height="" /></div>
-        <div class="col-md-8 col-xs-8 items">
-            <ul>
-                <li>
-                    <a href="{{video.url}}">
-                        <h4>{{video.songs.title}}</h4>
-                    </a>
-                </li>
-                <li>
-                    <h5>{{video.author}}</h5>
-                </li>
-                <li><em>Posté par {{user_id}}, le {{date}}</em></li>
-            </ul>
-        </div>
+</div>
+<div class="video" ng-repeat="video in $ctrl.list" ng-click="$ctrl.launch(video.music, video.title)">
+    <div class="col-md-3 col-xs-3 vignette"></div>
+    <div class="col-md-7 col-xs-7 items">
+        <ul>
+            <li>
+                <h4 ng-click="$ctrl.launch(video.music, video.title)">{{video.title}}</h4>
+            </li>
+            <li>
+                <h5>{{video.author}}</h5>
+            </li>
+            <li><em>Posté par {{user_id}}, le {{date}}</em></li>
+        </ul>
     </div>
 </div>
 <div class="col-md-6 col-xs-12">

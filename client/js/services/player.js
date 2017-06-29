@@ -3,15 +3,14 @@ angular.module("services")
   .service("playerService", function ($http, $q, $log, $window, $rootScope) {
 
     var tag = document.createElement('script');
-    tag.src = "http://www.youtube.com/iframe_api";
+    tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
     this.youtube = {
       ready: false,
       player: null,
-      playerId: null,
-      videoUrl: null,
+      videoId: null,
       videoTitle: null,
       playerHeight: '480',
       playerWidth: '640',
@@ -21,7 +20,7 @@ angular.module("services")
     this.results = [];
 
     this.history = [
-      { id: 0, url: 'http://www.youtube.com/watch?v=XKa7Ywiv734', title: '[OFFICIAL HD] Daft Punk - Give Life Back To Music (feat. Nile Rodgers)', author: '' }
+      { music: 'XKa7Ywiv734', title: '[OFFICIAL HD] Daft Punk - Give Life Back To Music (feat. Nile Rodgers)', author: '' }
     ];
 
     $window.onYouTubeIframeAPIReady = () => {
@@ -29,13 +28,13 @@ angular.module("services")
       this.youtube.ready = true;
       this.bindPlayer('placeholder');
       this.loadPlayer();
-      $rootScope.$apply();
+      //$rootScope.$apply();
     };
 
     onYoutubeReady = (event) => {
       $log.info('YouTube Player is ready');
-      this.youtube.player.cueVideoByUrl(this.history[0].url);
-      this.youtube.videoUrl = this.history[0].url;
+      this.youtube.player.cueVideoById(this.history[0].music);
+      this.youtube.videoUrl = this.history[0].music;
       this.youtube.videoTitle = this.history[0].title;
     }
 
@@ -46,8 +45,8 @@ angular.module("services")
         this.youtube.state = 'paused';
       } else if (event.data == YT.PlayerState.ENDED) {
         this.youtube.state = 'ended';
-        this.launchPlayer(this.upcoming[0].url, this.upcoming[0].title);
-        this.archiveVideo(this.upcoming[0].url, this.upcoming[0].title);
+        this.launchPlayer(this.upcoming[0].music, this.upcoming[0].title);
+        this.archiveVideo(this.upcoming[0].music, this.upcoming[0].title);
         this.deleteVideo(this.upcoming, this.upcoming[0].id);
       }
       $rootScope.$apply();
@@ -59,7 +58,7 @@ angular.module("services")
     };
 
     this.createPlayer = () => {
-      $log.info('Creating a new Youtube player for DOM id ' + this.youtube.playerId + ' and video ' + this.youtube.videoUrl);
+      $log.info('Creating a new Youtube player for DOM id ' + this.youtube.playerId + ' and video ' + this.youtube.videoId);
       return new YT.Player(this.youtube.playerId, {
         height: this.youtube.playerHeight,
         width: this.youtube.playerWidth,
@@ -83,77 +82,40 @@ angular.module("services")
       }
     };
 
-    this.launchPlayer = (url, title) => {
-      this.youtube.player.loadVideoByUrl(url);
-      this.youtube.videoUrl = url;
+    this.launchPlayer = (music, title) => {
+      this.youtube.player.loadVideoById(music);
+      this.youtube.videoId = music;
       this.youtube.videoTitle = title;
       console.log(this.youtube.videoUrl)
       return this.youtube;
     }
 
-    this.listResults = (data) => {
-      this.results.length = 0;
-      console.log(data);
-      for (var i = data.items.length - 1; i >= 0; i--) {
-        this.results.push({
-          url: data.items[i].id.videoUrl,
-          title: data.items[i].snippet.title,
-          description: data.items[i].snippet.description,
-          thumbnail: data.items[i].snippet.thumbnails.default.url,
-          author: data.items[i].snippet.channelTitle
-        });
-      }
-      return this.results;
-    }
-
-    this.queueVideo = (id, url, title, author) => {
+    this.queueVideo = (music, title, author) => {
       this.upcoming.push({
-        id: id,
-        url: url,
+        id: music,
         title: title,
         author: author
       });
       return this.upcoming;
     };
 
-    this.archiveVideo = (id, url, title, author) => {
+    this.archiveVideo = (music, title, author) => {
       this.history.unshift({
-        id: id,
-        url: url,
+        id: music,
         title: title,
         author: author
       });
       return this.history;
     };
 
-    deleteVideo = (list, id) => {
+    this.deleteVideo = (list, music) => {
       for (var i = list.length - 1; i >= 0; i--) {
-        if (list[i].id === id) {
+        if (list[i].music === music) {
           list.splice(i, 1);
           break;
         }
       }
     };
-
-    this.search = () => {
-      $http.get('https://www.googleapis.com/youtube/v3/search', {
-        params: {
-          key: 'AIzaSyCRkX3XPUNcOFOB9aVVUKr4oneXd3mtui0',
-          type: 'video',
-          maxResults: '8',
-          part: 'id,snippet',
-          fields: 'items/url,items/snippet/title,items/snippet/description,items/snippet/thumbnails/default,items/snippet/channelTitle',
-          q: this.query
-        }
-      })
-        .then((data) => {
-          playerService.listResults(data);
-          $log.info(data);
-        })
-        .catch(() => {
-          $log.info('Search error');
-        });
-    }
 
     this.getYoutube = () => {
       return this.youtube;
